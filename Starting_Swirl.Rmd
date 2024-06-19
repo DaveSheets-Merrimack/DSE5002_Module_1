@@ -1,0 +1,48 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+*Installing and Starting Swirl
+--------------------------------
+
+HD Sheets,  created 6/19/2024
+
+Content for DSE 5002 at Merrimack College
+
+----------------------------------------Dav
+
+This is an R Notebook showing how to install the swirl package and start it
+
+This is first code block, note how it starts and ends, use this punctuation when
+creating your own code blocks
+
+This command will download and install the swirl package for learning R on your 
+computer, it stores in on your hard-drive
+
+```{R}
+install.packages('swirl')
+```
+
+Before we can run swirl, we have to tell R we want the swirl package to be 
+active in our workspace,  the set of packages, functions and variables we are
+using
+
+We can do this using either require() or library()
+
+Action Required:   Use the help function to look up require() and library()-
+what seems to be the difference?
+
+```{R}
+require("swirl")
+```
+
+Now start swirl
+
+Notice that swirl is a function, we call it as swirl()
+
+Notice that install.packages(),require() and library() are also functions
+
+```{R}
+swirl()
+```
