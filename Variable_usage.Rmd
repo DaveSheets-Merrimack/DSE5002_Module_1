@@ -133,29 +133,28 @@ TRUE&FALSE
 ```
 #Lists
 
-R can create lists of variables
+R can create arrays of variables
 
-These are sometimes called arrrays, in other languages, but are called lists 
-in R
+
 
 ```{R}
 list_a=c(1,3,5,7,9)
 list_a
 ```
-We can use both class() and str() to figure out what a list is
+We can use both class() and str() to figure out what a array is
 
 ```{R}
 class(list_a)
 str(list_a)
 ```
-We can put a list within a list, and this just yields a single, long list
+We can put an array within an array, and this just yields a single, long array
 
 ```{R}
 list_b=c( c(1,2), c(3,4),c(5,6))
 list_b
 ```
 
-What do you think happens if we try to put different types of objects in a list?
+What do you think happens if we try to put different types of objects in an array?
 
 ```{R}
 list_c=c(1,2,3,"bob",5,6,"Wisconsin")
@@ -170,7 +169,7 @@ Is there one function that will do this for you?
 
 ```
 
-#Creating lists of sequences
+#Creating lists of arrays
 
 There are a couple of ways of doing this
 
@@ -184,14 +183,14 @@ list_y
 
 #Vector operations
 
-we can carry out operations on a list all at once
+we can carry out operations on an array all at once
 
 ```{R}
 list_c=3*list_a+4
 list_c
 ```
 
-Notice that are carried out the same operation on each item in the list
+Notice that are carried out the same operation on each item in the array
 
 We can do this with logical operations or comparisons as well
 
@@ -229,7 +228,7 @@ list_a[c(1,3)]
 ```
 #Indexing using an array of TRUE and FALSE values
 
-We can also select items in an array by indexing them with a list of TRUE and
+We can also select items in an array by indexing them with an array of TRUE and
 FALSE values the same length as the array
 
 Only entries with a TRUE value will be extracted
@@ -246,7 +245,7 @@ list_a[my_index]
 Slicing an array means to select only the values that meet some specific 
 condition
 
-To do this we combine a test or comparision 
+To do this we combine a test or comparison 
 
 say list_a>6
 
@@ -315,9 +314,9 @@ Predict the value, then try it
 
 #Sorting and ordering
 
-We can sort a list in ascending or descending order
+We can sort an array in ascending or descending order
 
-Note that this creates a new list
+Note that this creates a new array
 
 ```{R}
 list_x=1:10
@@ -326,13 +325,13 @@ list_x
 list_x2
 ```
 
-Sometimes we will want the order in which to slice or arrange the list rather
-than the sorted list itself.
+Sometimes we will want the order in which to slice or arrange the array rather
+than the sorted array itself.
 
 This will become important when we start working with larger data structures
 
 This is done with the order() function which will provide an index of the
-list in sorted order
+array in sorted order
 
 ```{R}
 list_k=c("a","q","x",4)
