@@ -1,0 +1,246 @@
+---
+title: "Coming_attractions"
+author: "HD Sheets"
+date: "2024-06-20"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Coming Attractions
+
+Okay, I'm going to drop you in the deep end, and show you some cool things in R
+
+This is way ahead of schedule, so think of this as motivation
+
+YOU ARE NOT EXPECTED TO BE ABLE TO DO SOMETHING LIKE THIS AFTER SEEING THIS
+EXAMPLE!  There are a lot of techniques shown here that will take a while to 
+learn,  don't feel bad if it doesn't all make sense right now- I promise it will
+in a few months of your grad program!
+
+I went to the "Analyze Boston" website- do google it and have a look at
+the public data available there.
+
+Most US cities have these,  some times they are called Open Data Cincinnati or
+something similar
+
+From this site, I downloaded the property assessment roll data for the city of
+Boston as a CSV (comma separated value) file.  I always find these tax rolls 
+fairly fascinating
+
+Download this file from Canvas and store it on your hard drive.
+
+The file name is 
+
+        Boston_Assessment_Roll_2024.csv
+
+Then we can load it into R and start to look at it
+
+#First find the file name and path
+
+This command opens up a file browser,  select the Boston Assessment file
+
+You may have to look on your menu bar to see the file browser, it sometimes 
+opens in odd places
+
+```{R}
+
+infile=file.choose()
+
+infile
+
+```
+
+The variable "infile" is a string that has the name and location of the file we will need
+
+Now we can load this entire data file into a structure in R called a Data Frame
+
+Data Frames look like Excel sheets, or data tables in an SQL data base
+
+Each column is variable and each row is an example
+
+We first load the data frame
+
+```{R}
+
+Boston_assessment_df=read.csv(infile)
+
+```
+
+We have seen the str (structure) command before, let's use it on our data frame
+
+```{R}
+str(Boston_assessment_df)
+```
+
+How many properties (rows) are there?
+
+How many variables (columns) are there?
+
+We can see the first few rows by using the head() command
+
+```{R}
+head(Boston_assessment_df)
+
+```
+
+We can access individual columns by the name of the column
+
+Here are the first ten bldg values
+
+Note these are just the building values, there is a land value and a total
+value in the data frame as well.   Building value is only one way to think 
+about values.
+
+```{R}
+Boston_assessment_df$BLDG_VALUE[1:10]
+```
+Notice that the Building values are appearing as characters not as numeric values, 
+we will need to think about how to deal with this
+
+I want numeric values for the value of the properties, so I can compute
+things like the average.  To do that, we have to convert from string to numeric
+
+Remember, data formatting and conversion is a constant part of your workload
+as a data scientist.
+
+Like many tasks in R, there are multiple valid ways to do this.
+
+We could try using as.numeric,  let's try it on the first ten bldg values
+
+```{R}
+as.numeric(Boston_assessment_df$BLDG_VALUE[1:10])
+```
+
+Okay that didn't work because of the commas in the BLDG_VALUE entries
+
+I have to remove the commas first then convert the characters strings to 
+numeric
+
+I will use the gsub command to replace the commas (",") with nothing ("")
+
+gsub stands for global substitution,  and is making use of a REGEX or regular
+expression to make the alteration
+
+REGEX is a set of rules for processing text,  it is implemented in many 
+languages including R, Python and SQL,   you will want to learn it as some
+point.   Not today though :)
+
+
+```{R}
+value_no_comma=gsub(",","",Boston_assessment_df$BLDG_VALUE[1:10])
+value_no_comma
+as.numeric(value_no_comma)
+```
+
+Okay, that will do the job.
+
+Notice that I just used the first 10 entries, not the entire list to do the
+job.   I was testing the process to see if I had the right operations, now I
+convert the entire column of the data frame and store as a new column in the 
+data frame I'll call BLDG_VALUE_NUMERIC
+
+```{R}
+temp_value=gsub(",","",Boston_assessment_df$BLDG_VALUE)
+Boston_assessment_df["BLDG_VALUE_NUMERIC"]=as.numeric(temp_value)
+```
+
+Let's see if that worked, can I compute the average value of properties in 
+Boston now?
+
+```{R}
+mean(Boston_assessment_df$BLDG_VALUE_NUMERIC)
+```
+
+What other measurement or statistic might be a better choice to characterize
+housing prices?  Can you calculate this?
+
+Enter the expression below
+
+```{R}
+
+```
+
+#How about the maximum value
+
+```{R}
+max(Boston_assessment_df$BLDG_VALUE_NUMERIC)
+```
+
+#Which property has the highest value?
+
+Well, Building value anyway.
+
+We can use the which function to find the index of the most expensive 
+property- this gives us the row number in the table with the highest
+value
+
+We can then referenc that row, and see what the variable values are
+
+```{R}
+max_value_index<-which(Boston_assessment_df$BLDG_VALUE_NUMERIC==max(Boston_assessment_df$BLDG_VALUE_NUMERIC))
+max_value_index
+Boston_assessment_df[max_value_index,]
+```
+
+Okay, it's Boston General Hospital, that kinda makes sense
+
+#Unique values: How many cities are on this roll?
+
+The unique() function will allow us to find the unique values in a column
+
+I want to find out 
+
+```{R}
+unique(Boston_assessment_df$CITY)
+
+```
+
+#How many different streets are there?
+
+We can create a length of the unique streets then find the length of that list
+
+```{R}
+length(unique(Boston_assessment_df$ST_NAME))
+```
+
+#Median Building Values per City
+
+There are about 20 distinct cities,  are the median building values different
+in each of these?
+
+There is a built-in R function to do this, by()
+
+This is a variant on the R functions apply(),sapply() and tapply()
+
+To use it, we need a factor variable
+
+A factor is a variable that describes membership in a group.   A city is a 
+group,  sex or gender could be a group, species could be a group, job
+positions could be a group, etc
+
+If we declare a variable to be a factor, R will know how to use it in 
+calculations as a grouping variable when computing statistics
+
+We will declare CITY to be a factor
+
+```{R}
+Boston_assessment_df$CITY=factor(Boston_assessment_df$CITY)
+```
+
+Now we can use the by() function to apply the median function to the 
+BLDG_VALUE_NUMERIC grouped by City
+
+```{R}
+by(Boston_assessment_df$BLDG_VALUE_NUMERIC,Boston_assessment_df$CITY,median)
+```
+
+Well, I find things like this kind of interesting.
+
+I hope this wasn't overwhelming, at the moment we are taking some small
+steps to learn R and I want to show you what the payoff for your work 
+will look like down the line.
+
+What other questions could you ask about this data?
