@@ -1,6 +1,8 @@
 ---
 title: "Basic Variable Usage"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 date: "2024-06-20"
 ---
 
@@ -12,10 +14,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 HD Sheets
 created 6/19/2024
+updated 9/30/2024
 
-Practice Material for DSE 5002
+# Practice Material for DSE 5002
 
-#This is a tutorial
+
+Complete all the requested actions,  knit to a pdf and submit to the Pair 
+Programming assignment for the week
+
+# This is a tutorial
 
 -
 When looking at a tutorial, ask yourself:
@@ -33,7 +40,7 @@ saw them.
 
 To get help use the help browser on the right, and use google as well.
 
-#Creating some basic variables
+# Creating some basic variables
 
 R uses dynamic typing, so we don't have to tell R what type of variable each of
 of variable is when we create it.
@@ -53,9 +60,9 @@ c="Monday"
 d=TRUE
 ```
 
-#Action Required:
+# *Action Required:*
 
-Ask yourself, what type or class of variable do I think the above variables
+Ask yourself, what type or class of variable do I think the above variables (a,b,c,d)
 are?
 
 Type your answers into the file here:
@@ -70,7 +77,7 @@ class(b)
 class(c)
 class(d)
 ```
-Were there any surprises here?
+*Were there any surprises here?*
 
 We could also use the str() or structure function to learn about variables
 
@@ -82,6 +89,8 @@ str(c)
 str(d)
 
 ```
+
+# Changing Type
 
 we can force variables to change type
 
@@ -96,10 +105,14 @@ Let's see what happened
 str(g)
 str(h)
 ```
-Did this produce the change you expected?
+*Did this produce the change you expected?*
 
+# Math
 
 We can do math with our variables
+
+These are the basic math operations on variables,  R can do all the basic operations as
+well as linear algebra operations (coming later)
 
 ```{R}
 
@@ -110,6 +123,9 @@ a^2
 a/b
 
 ```
+
+#Comparisons
+
 We can also make comparisons between variables
 
 These result in logical variables, which are TRUE or FALSE
@@ -120,6 +136,7 @@ a<2
 a==5
 a!=b
 ```
+
 There are also the Boolean logic operators AND, OR and NOT
 which are &,| and !
 
@@ -131,36 +148,44 @@ TRUE&FALSE
 (a!=b)&(b>4)
 !d
 ```
-#Lists
 
-R can create arrays of variables
+# Vectors
 
+R can create vectors of variables
 
+All items in a vector must be the same type
+
+We start the definition of a vector with c()
 
 ```{R}
-list_a=c(1,3,5,7,9)
-list_a
+vec_a=c(1,3,5,7,9)
+vec_a
 ```
+
 We can use both class() and str() to figure out what a array is
 
 ```{R}
-class(list_a)
-str(list_a)
+class(vec_a)
+str(vec_a)
 ```
-We can put an array within an array, and this just yields a single, long array
+
+We can put a vector within a vector,  creating one long vector
+
+Note: In other languages,  this is called an array,  so if I use the term "array"
+at points, think vector
 
 ```{R}
-list_b=c( c(1,2), c(3,4),c(5,6))
-list_b
+vec_b=c( c(1,2), c(3,4),c(5,6))
+vec_b
 ```
 
-What do you think happens if we try to put different types of objects in an array?
+What do you think happens if we try to put different types of objects in an vector?
 
 ```{R}
-list_c=c(1,2,3,"bob",5,6,"Wisconsin")
+vec_c=c(1,2,3,"bob",5,6,"Wisconsin")
 ```
 
-Action required
+# *Action required*
 
 Enter some code to figure out what is in list_c and what type it is.
 Is there one function that will do this for you?
@@ -169,53 +194,63 @@ Is there one function that will do this for you?
 
 ```
 
-#Creating lists of arrays
+#Creating vectors using automatic functions
 
 There are a couple of ways of doing this
 
 ```{R}
-list_x=1:10
-list_x
-list_y=seq(from=1,to=21, by=3)
-list_y
+vec_x=1:10
+vec_x
+vec_y=seq(from=1,to=21, by=3)
+vec_y
 ```
 
+A vector of random values
+
+```{R}
+vec_z=runif(5,0,1)
+vec_z
+
+```
 
 #Vector operations
 
-we can carry out operations on an array all at once
+we can carry out operations on a vector all at once
 
 ```{R}
-list_c=3*list_a+4
-list_c
+vec_c=3*vec_a+4
+vec_c
 ```
 
-Notice that are carried out the same operation on each item in the array
 
-We can do this with logical operations or comparisons as well
+Notice that are carried out the same operation on each item in the vector
+
+We can do this with *logical operations* or *comparisons* as well
 
 ```{R}
-list_a<4
+vec_a<4
 
 ```
+
 Notice that this gives us a list of true and false values, one for each entry 
 in the list.
 
 This ability will be very useful to us, as you will see in a moment
 
-#Indexing a list or array
+# Indexing a list or array
 
-Indexing means to specify which items in a list we want
+Indexing means to specify which items in a vector (or array) we want
 
-We can use a number to extract a specific entry in the list
+We can use a number to extract a specific entry in the vector
 
 ```{R}
-list_a
-list_a[2]
+vec_a
+vec_a[2]
 ```
-Action required
 
-Write code below to extract the 3rd item in list b
+# *Action required*
+
+Write code below to extract the 3rd item in vector b
 
 ```{R}
 
@@ -224,9 +259,10 @@ Write code below to extract the 3rd item in list b
 We can extract several items at once
 
 ```{R}
-list_a[c(1,3)]
+vec_a[c(1,3)]
 ```
-#Indexing using an array of TRUE and FALSE values
+
+# Indexing using an array of TRUE and FALSE values
 
 We can also select items in an array by indexing them with an array of TRUE and
 FALSE values the same length as the array
@@ -236,34 +272,35 @@ Only entries with a TRUE value will be extracted
 ```{R}
 
 my_index=c(FALSE, TRUE, FALSE, FALSE,TRUE)
-list_a
-list_a[my_index]
+vec_a
+vec_a[my_index]
 
 ```
-#Slicing
+## Slicing
 
 Slicing an array means to select only the values that meet some specific 
 condition
 
 To do this we combine a test or comparison 
 
-say list_a>6
+say vec_a>6
 
-which generates a list of TRUE/FALSE values with the indexing using TRUE/FALSE
+which generates a vector of TRUE/FALSE values with the indexing using TRUE/FALSE
 
 Here it is
 
 ```{R}
-list_a[(list_a)>6]
+vec_a[(vec_a)>6]
 
 ```
+
 This maneuver, slicing using a test condition, is a really powerful move!
 
 Remember this, you will use it over and over again.
 
 It works in Python too!
 
-#Other cool moves based on Logical Arrays
+# Other cool moves based on Logical Arrays
 
 We can do some other moves with logical arrays as well
 
@@ -271,18 +308,29 @@ The any command checks to see if any of the items in a list meet the condition
 
 ```{R}
 
-any((list_a==9))
+any((vec_a==9))
 
 ```
+
+# *Question/Action* 
+
  What do you think all() will do?
  
- Try it on list_b
+Try it on vec_b
+
+Enter it in the cell below
  
- Find a condition that gives you a TRUE and another one that gives you a false
+```{R}
+ 
+```
+ 
+Find a condition that gives you a TRUE and another one that gives you a false
  
 ```{R}
 
 ```
+
+#Question/Action
 
 Use the help function to look up the which() function
 
@@ -299,11 +347,14 @@ Here's another odd one
 Watch what happens if we sum() or add up a logical array
 
 ```{R}
-g=list_a>4
+g=vec_a>4
 g
 sum(g)
 
 ```
+
+# *Question/Action*
+
 What will sum( c(1,2,3,3,4)>2.1)  give us?
 
 Predict the value, then try it
@@ -312,17 +363,17 @@ Predict the value, then try it
 
 ```
 
-#Sorting and ordering
+# Sorting and ordering
 
-We can sort an array in ascending or descending order
+We can sort an vectotr in ascending or descending order
 
-Note that this creates a new array
+Note that this creates a new vector,   we need to store it somewhere
 
 ```{R}
-list_x=1:10
-list_x2=sort(list_x,decreasing=TRUE)
-list_x
-list_x2
+vec_x=1:10
+vec_x2=sort(vec_x,decreasing=TRUE)
+vec_x
+vec_x2
 ```
 
 Sometimes we will want the order in which to slice or arrange the array rather
@@ -334,13 +385,40 @@ This is done with the order() function which will provide an index of the
 array in sorted order
 
 ```{R}
-list_k=c("a","q","x",4)
-index_k=order(list_k,decreasing=FALSE)
-list_k[index_k]
+vec_k=c("a","q","x",4)
+index_k=order(vec_k,decreasing=FALSE)
+vec_k[index_k]
 
 ```
 
+## *Question/Action*
 
+Create a random vector of 10 values between 0 and 1 (see the earlier example on how to do this)
 
+Then sort this vector in increasing order and save it to a new name
 
+```{R}
 
+```
+
+## String variables
+
+We can store strings (text) in r and we can create vectors of string variables
+
+```{r}
+a="Bob"
+b="Smith"
+
+d=c("alpha","beta","gamma")
+
+a
+b
+d
+
+```
+We will see more later on how to work with text,  but the cat() function, 
+short for concatenate, will paste strings together and print them
+
+```{R}
+cat(a,b,sep=" ")
+```

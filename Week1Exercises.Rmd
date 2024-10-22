@@ -1,0 +1,128 @@
+---
+title: "Week 1 Exercises"
+author: "Your Name Here"
+date: "May 9, 2022"
+output: pdf_document
+---
+
+# Module 01 Lab 01   Homework assignment
+
+
+
+Please complete all exercises below:
+
+
+
+# Exercise 1
+
+Assign 10 to the variable x. Assign 5 to the variable y. Assign 20 to the variable z.
+
+```{r ex1}
+#your code below
+
+```
+
+
+# Exercise 2
+
+Show that x is less than z but greater than y.
+
+**Note: your output must be a SINGLE boolean, do not output a boolean for each expression.**
+
+```{r ex2}
+#your code below
+
+```
+
+# Exercise 3
+
+Show that x does not equal z and that y does not equal z
+
+**Note: your output must be a SINGLE boolean, do not output a boolean for each expression.**
+
+```{r ex3}
+#your code here
+
+```
+
+
+# Exercise 4
+
+Show that the formula `x + 2y = z`.  is true
+
+**Note: your output must be a SINGLE boolean**
+
+```{r ex4}
+#your code below
+
+```
+
+# Exercise 5
+
+I have created a vector (test_vector) of integers for you. Determine if any of x, y, or z are in the vector. 
+
+**Note: your output must be a SINGLE boolean, do not output a boolean for each expression.**
+
+
+```{r ex5}
+test_vector <- c(1,5,11:22)
+#your code below
+
+```
+
+# Exercise 6
+
+Show which value is contained in the test vector. To do this you will need to create an element-wise logical vector using operators. `x == vector`. Once you have done that you will need to use slicing to return all indices that have matches.
+**Note: your output should be two integers**
+
+```{r ex6}
+#your code below
+
+```
+
+#Problems from R for Data Science
+
+https://r4ds.hadley.nz/workflow-basics
+
+Exercises 2.5
+
+1) Why does this code not work?
+
+fix it so it works
+
+```{R}
+my_variable <- 10
+my_varıable
+```
+
+Look carefully! (This may seem like an exercise in pointlessness, but training your brain to notice even the tiniest difference will pay off when programming.)
+
+
+2.) Tweak each of the following R commands so that they run correctly:
+
+```{R}
+libary(todyverse)
+
+ggplot(dTA = mpg) + 
+  geom_point(maping = aes(x = displ y = hwy)) +
+  geom_smooth(method = "lm)
+
+```
+
+
+3.) Press Option + Shift + K / Alt + Shift + K. What happens? How can you get to the same place using the menus?
+
+
+4.) Let’s revisit an exercise from the Section 1.6. Run the following lines of code. Which of the two plots is saved as mpg-plot.png? Why?
+
+
+```{R}
+my_bar_plot <- ggplot(mpg, aes(x = class)) +
+  geom_bar()
+my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
+
+```
+
+

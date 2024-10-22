@@ -1,0 +1,153 @@
+---
+title: "File Utilities in R"
+author: "HD Sheets"
+date: "2024-09-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## File Utilities in R
+
+R has a number of tools for working with the file management
+portion of the operating system of your computer.
+
+Windows,  Mac OSX, Unix and LINUX have a lot of similarities in how they manage
+file.
+
+Hard drives, cloud storage and removable storage (USBs,CDs,floppies, etc) all
+have drive names.  It is usually a letter (A,B,C,E...etc) but not always
+
+Files are stored in *directories* or *folders* which are on the drives
+
+Each folder can have many *subdirectories*, or additional folders contained
+within it.
+
+Each file will have a *name* and a *file extension*
+
+The file 
+
+  "sales_pipe.txt" 
+
+has the name
+
+  "sales_pipe"
+
+and the file extension ".txt"  indicating it is text file.
+
+# Full file names and file paths
+
+To load a file, the operating system needs to have the *full file path* which
+indicates
+
+      -the drive the data is on
+      -the name of the directory on the drive the file is in
+      -the name of the file
+      -the the file extension
+      
+The name of the drive and directory (plus subdirectories) is called a file 
+path
+
+so for the full file name
+
+"C:\\Users\\sheetsh\\Documents\\Merrimack_Data_Science\\DSE50002\\Module_2\\sales_pipe.txt"
+
+The drive is  "C:"
+
+the directory name is "\\Users\\sheetsh\\Documents\\Merrimack_Data_Science\\DSE50002\\Module_2\\"
+
+and the file name and extension are "sales_pipe.txt"
+
+"C:\\Users\\sheetsh\\Documents\\Merrimack_Data_Science\\DSE50002\\Module_2\\sales_pipe.txt"
+
+
+# Getting the full file path
+
+You can 
+
+   -look this up by browsing to the file,  and perhaps using the properties of
+   the file to get the location
+   
+   -Using the file.choose() function in R to get the full name
+   
+```{R}
+
+file.choose()
+```
+
+# WARNING
+
+file.choose() does not knit,  remove this line, or put a # in front of it before
+you try to knit
+
+# Question/Action
+
+Use file.choose() in the code block below to find the full file name and
+path of this RMD file.   Cut and paste it into a variable called this_file
+
+```{R}
+# rem the file.choose() line out with a # after you run it
+file.choose()
+
+# paste the correct file path here
+
+this_file="C:\\junk.txt"
+```
+
+
+#Working directories
+
+R has a "working directory" which is where it looks for files by default, and
+saves files by default
+
+YOu can see the current working directory using getwd()
+
+```{R}
+
+getwd()
+```
+
+You can see all the files in a directory using dir()
+
+```{R}
+dir()
+```
+
+#Question/Action
+
+Set your working directory to the location where you downloaded this file.
+Use dir() to get a list of all the files in this subdirectory.
+
+```{R}
+
+
+```
+
+
+You can also see the working directory using the file window to the right 
+in RStudio
+
+You can set a working directory using the setwd() command, or using the file
+window, or by using the "Session ->Set Working Directory" command on the 
+command window for RStudio
+
+They all work fine.
+
+I typically use file.choose() to get the file directory and name for each file
+(written correctly) and then store this in a variable written in a code block.
+
+This ensures that the file will load properly each time, without me having to
+set the working directory all the time.   In the end, this saves me time and 
+aggravation.
+
+# Terminal
+
+There is also a terminal available in RStudio, this is in the lower window of
+RStudio next to "console".   Terminal is a command terminal in Windows, or a
+Unix/Linux terminal in other systems.
+
+If you know the system commands in your operating system, you can run them from 
+the terminal to create directories, move files, etc, etc.
+
